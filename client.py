@@ -7,7 +7,7 @@ import hashlib
 #TO DO
 #make client logfile
 #fix invalid username
-#fix spelling mistakes
+#make admin user
 
 
 

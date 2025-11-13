@@ -5,10 +5,13 @@ import threading
 import logging
 import signal
 import hashlib
-#from emoji import emojize
-import random
-from collections import Counter
-import math
+
+
+#TO DO
+#make direct messaging
+#make client messages be able to have colour, underline, bold ...
+#set up admin commands
+
 
 # Set up basic logging configuration
 logging.basicConfig(filename='server_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
