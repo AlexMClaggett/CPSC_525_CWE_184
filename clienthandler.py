@@ -45,10 +45,14 @@ class ClientHandler:
                 ascii_file_name = ""
                 #put the filename into ascii format because of windows file format 
                 file_name = "_".join(file_name)
+                print(f"Socket = {self.client_socket}")
                 for char in file_name:
                     ascii_file_name += str(ord(char)) if char != "_"else "_"
                 try:
+                    print(f"file name = {ascii_file_name}")
+                    ascii_file_name += ".txt"
                     with open(ascii_file_name, 'r') as file:
+                        print("i am here")
                         for line in file:
                             self.client_socket.sendall(line.encode())
                 except:
