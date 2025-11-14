@@ -4,8 +4,9 @@ import hashlib
 
 def load_user(user):
     asciiUser = ""
+    user = "_".join(user)
     for char in user:
-        asciiUser = asciiUser + str(ord(char))
+        asciiUser += str(ord(char)) if char != "_"else "_"
     try:
         file = asciiUser + ".json"
         with open(file, "r") as f:
@@ -16,8 +17,9 @@ def load_user(user):
     
 def save_user(user, user_dict):
     asciiUser = ""
+    user = "_".join(user)
     for char in user:
-        asciiUser = asciiUser + str(ord(char))
+        asciiUser += str(ord(char)) if char != "_"else "_"
     file = asciiUser + ".json"
     with open(file, "w") as f:
         json.dump(user_dict, f)
@@ -29,8 +31,6 @@ def main():
     John = {
         "name" : "John",
         "password" : password,
-        "Mary" : False,
-        "MARY" : "banned"
     }
     print(type(John))
     save_user("John", John)
@@ -38,8 +38,6 @@ def main():
     Mary = {
         "name" : "Mary",
         "password" : password,
-        "John" : False,
-        "MARY" : False
     }
     save_user("Mary", Mary)
     print(load_user("Mary"))
@@ -48,11 +46,17 @@ def main():
     MARY = {
         "name" : "MARY",
         "password" : password,
-        "John" : "banned",
-        "Mary" : False
     }
     save_user("MARY", MARY)
     print(load_user("MARY"))   
+    
+    password = hashlib.sha256("111".encode()).hexdigest()
+    mary = {
+        "name" : "mary",
+        "password" : password,
+    }
+    save_user("mary", mary)
+    print(load_user("mary"))   
     
 
 

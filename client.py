@@ -17,15 +17,16 @@ SERVER_PORT = 12345
 RUNNING = True # if true is able to receive messages
 clear_right = "\033[K"
 prev_line = "\033[F"
-clients = ["John", "Mary", "MARY", "Admin"]
-invalidUsername = ["", " "]
+clients = ["John", "Mary", "MARY"]
+invalidUsername = ["", " ", "Admin"]
 
 # get the user info and put into a dict
 def load_user(user):
     asciiUser = ""
     #put the username into ascii format because of windows file format 
+    user = "_".join(user)
     for char in user:
-        asciiUser = asciiUser + str(ord(char))
+        asciiUser += str(ord(char)) if char != "_"else "_"
     try:
         file = asciiUser + ".json"
         with open(file, "r") as f:
@@ -37,8 +38,9 @@ def load_user(user):
 def save_user(user, user_dict):
     asciiUser = []
     #put the username into ascii format because of windows file format 
+    user = "_".join(user)
     for char in user:
-        asciiUser.append(ord(char))
+        asciiUser += str(ord(char)) if char != "_"else "_"
     file = user + ".json"
     with open(file, "w") as f:
         json.dump(user_dict, f)
@@ -77,7 +79,7 @@ Would you like to login in or make and account?
                 #check for the username and compare the passwords, for security don't tell the user which is incorrect
                 if user_dict != False and user_dict["password"] == hashlib.sha256(password.encode()).hexdigest():
                     if username not in clients:
-                        clients = clients.append(client)
+                        clients = clients.append(username)
                     connect(username, client_socket)
                 else:
                     #ask the user if they would like to try again or if they whish to exit the program
@@ -119,8 +121,6 @@ Would you like to login in or make and account?
                     #make the user dict and insert thier name into the list of known users
                     user_dict["name"] = username
                     user_dict["password"] = hashlib.sha256(password.encode()).hexdigest()
-                    for client in clients:
-                        user_dict[client] = False
                     clients = clients.append(username)
                     userContinue = True
             #make the json file and connect the new user to the server 
@@ -138,7 +138,7 @@ def connect(user_name, client_socket):
     send_message(client_socket, user_name)
 
     #make the thread for accepting connection
-    threading.Thread(target=recieve_message, args=(client_socket,)).start()
+    threading.Thread(target=receive_message, args=(client_socket,)).start()
 
 
     # loop for accepting input
@@ -170,6 +170,8 @@ def try_connection(client_socket):
                 print("Cannot connect to server")
                 return False
 
+
+
 def send_message(client_socket, message):
     # try to send a message will catch for timeout of connection loss
     try:
@@ -195,7 +197,7 @@ def my_exit(client_socket, user_name):
     exit(0)
 
 
-def recieve_message(client_socket):
+def receive_message(client_socket):
     while RUNNING:
         try:
             response = client_socket.recv(4024).decode('utf-8', 'ignore')
