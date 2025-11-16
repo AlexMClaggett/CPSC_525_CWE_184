@@ -36,7 +36,7 @@ def load_user(user):
     
 # save a user dict as a json file
 def save_user(user, user_dict):
-    asciiUser = []
+    asciiUser = ""
     #put the username into ascii format because of windows file format 
     user = "_".join(user)
     for char in user:
@@ -118,7 +118,7 @@ Would you like to login in or make and account?
                 if password != password2:
                     print("Passwords do not match please try again.")
                 else:
-                    #make the user dict and insert thier name into the list of known users
+                    #make the user dict and insert their name into the list of known users
                     user_dict["name"] = username
                     user_dict["password"] = hashlib.sha256(password.encode()).hexdigest()
                     clients = clients.append(username)
