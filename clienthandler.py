@@ -33,27 +33,23 @@ class ClientHandler:
         # do changes as needed
         match new_state:
             case ClientState.IN_USER_MENU:
+                self.client_socket.sendall("If you wish to disconnect type \exit if you wish to pick a new user type '\\'new User".encode())
                 self.client_socket.sendall("Please type the name of the person you wish to talk to:".encode())
                 client_list_print = ""
-                for i in range(0, len(server.clients)):
-                    client_list_print += "\t" + server.clients[i]
+                i = 0
+                print(f"Clients at time: {server.clients()}")
+                for item in server.clients():
+                    client_list_print += "\t" + item
                     if i % 2 == 0: client_list_print += "\n"
+                    i += 1
                 self.client_socket.sendall(client_list_print.encode())
             case ClientState.IN_CHAT:
                 sort = sorted([self.user_name, self.user_connection])
-                file_name = "".join(sort)
-                ascii_file_name = ""
-                #put the filename into ascii format because of windows file format 
-                file_name = "_".join(file_name)
-                print(f"Socket = {self.client_socket}")
-                for char in file_name:
-                    ascii_file_name += str(ord(char)) if char != "_"else "_"
+                file = server.ascii_filename("".join(sort), ".txt")
                 try:
-                    print(f"file name = {ascii_file_name}")
-                    ascii_file_name += ".txt"
-                    with open(ascii_file_name, 'r') as file:
+                    with open("database/" + file, 'r') as f:
                         print("i am here")
-                        for line in file:
+                        for line in f:
                             self.client_socket.sendall(line.encode())
                 except:
                     pass
@@ -85,10 +81,15 @@ class ClientHandler:
     
     
     def user_menu(self):
-        # Listen for user input to connect to someone
+        #Listen for an exit first
         user_to_connect = self.client_socket.recv(1024).decode().rstrip()
-        if user_to_connect not in server.clients:
-            print(f"user gave {user_to_connect} server list {server.clients}")
+        if user_to_connect == "\\exit":
+            self.set_state(ClientState.DISCONNECTED)
+        if user_to_connect == "\\new user":
+            self.set_state(ClientState.IN_USER_MENU)
+        # Listen for user input to connect to someone
+        if user_to_connect not in server.clients():
+            print(f"user gave {user_to_connect} server list {server.clients()}")
             self.client_socket.sendall("Please pick a user in the list.".encode())
         else:
             self.user_connection = user_to_connect
@@ -97,15 +98,17 @@ class ClientHandler:
     
     def in_chat(self):
         message = self.client_socket.recv(1024).decode()
+        check_state = message.lower()
+        if check_state == "\\exit":
+            self.set_state(ClientState.DISCONNECTED)
+        if check_state == "\\new user":
+            self.set_state(ClientState.IN_USER_MENU)
         #need to make a function that checks the message for \ and does the appropriate task
         if not message:  # Client has closed the connection
             self.set_state(ClientState.DISCONNECTED)
-        # remove client form server
-        if message == "\\user_menu":
-            self.set_state(ClientState.IN_USER_MENU)
         # message to be sent to the chosen users
         else:
-            server.send_to_user(self.user_name, self.user_connection, message)
+            server.send_to_user(self.user_name, self.client_socket, self.user_connection, message)
 
                     
                    

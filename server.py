@@ -6,7 +6,10 @@ import logging
 import signal
 import hashlib
 from enum import Enum
+from pathlib import Path
+import os
 import clienthandler
+import clientstartup
 
 #TO DO
 #make direct messaging
@@ -22,8 +25,8 @@ HOST = 'localhost'
 PORT = 12345
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 list_clients = dict()
-clients = ["John", "Mary", "MARY"]
-
+_clients = set()
+def clients(): return _clients
 ascii_night_sky = '''
        + o          .         .._                 . o                     +     
          '  '     '         .' .-'`                   .                 .       
@@ -50,51 +53,76 @@ ascii_night_sky = '''
 '''
 
 
+# get the user info and put into a dict
 def load_user(user):
+    file = ascii_filename(user, ".json")
     try:
-        file = user + ".json"
-        with open(file, "r") as f:
+        with open("database/" + file, "r") as f:
             return json.load(f)
     except:
-        return {}
-
-def save_user(user, user_dict):
-    file = user + ".json"
-    with open(file, "w") as f:
+        return False
+    
+    
+# save a user dict as a json file
+def save_user(user_dict):
+    file = ascii_filename(user_dict["name"], ".json")
+    with open("database/" + file, "w") as f:
         json.dump(user_dict, f)
+        
 
 
 def write_to_file(user1, user2, write):
     sort = sorted([user1, user2])
-    file_name = "".join(sort)
-    ascii_file_name = ""
-    #put the filename into ascii format because of windows file format 
-    file_name = "_".join(file_name)
-    for char in file_name:
-        ascii_file_name += str(ord(char)) if char != "_"else "_"
+    file = ascii_filename("".join(sort), ".txt")
     #append to the file or create one
     try:
-        file = ascii_file_name + ".txt"
-        with open(file, "a") as f:
+        with open("database/" + file, "a") as f:
             f.write(write)
     except:
         return False
     
     
-def send_to_user(sender, receiver, message):
-    message_send = f"{sender}: {message}\n"
+def send_to_user(sender, senderSocket, receiver, message):
+    message_send = f"{sender}: {message}"
+    senderSocket.sendall(message_send.encode())
     client_socket = next((k for k, v in list_clients.items() if receiver in v), None)
     if client_socket != None:
         (_, user, handler) = list_clients.get(client_socket)
         if handler.user_connection == sender:
             client_socket.sendall(message_send.encode())
-        write_to_file(sender, receiver, message_send)
+        write_to_file(sender, receiver, (message_send))
     else:
-        write_to_file(sender, receiver, message_send)
+        write_to_file(sender, receiver, (message_send))
+
+
+def get_database(require_ending=None):
+    PROJECT_ROOT = Path(__file__).resolve().parent
+    DATABASE_DIR = PROJECT_ROOT / "database"
+    files = []
+    for file in os.listdir(DATABASE_DIR):
+        if require_ending != None and not file.endswith(require_ending):
+            continue
+        files.append(os.path.join(DATABASE_DIR, file))
+    return files
+    
+    
+def ascii_filename(name, ending=None):
+    asciiName = ""
+    #put the username into ascii format because of windows file format 
+    name = "_".join(name)
+    for char in name:
+        asciiName += str(ord(char)) if char != "_"else "_"
+    if ending != None:
+        asciiName += ending
+    print(f"ASCII Name: {asciiName}")
+    return asciiName
         
 
-
 def start_server():
+    #make client list
+    make_client_list()
+    #print(f"initial clients: {clients()}")
+    
     """ Start the server and listen for incoming connections. """
     # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
     server_socket.bind((HOST, PORT))
@@ -102,23 +130,40 @@ def start_server():
     server_socket.settimeout(1)
     logging.info(f"Server started and listening on {HOST}:{PORT}")
     print(f"Server started and listening on {HOST}:{PORT}")
-
     while True:
         try:
             # Accept new client connections and start a thread for each client
             client_socket, client_address = server_socket.accept()
-            user_name = client_socket.recv(1024).decode()
-            global clients
-            if not user_name in clients:
-                clients.append(user_name)
-            client_socket.sendall(ascii_night_sky.encode())
-            client_socket.sendall("You are now connected to the server. Start typing to communicate".encode())
-            logging.info(f"Sent welcome art to {client_address}, {user_name}")
-            client_handler = clienthandler.ClientHandler(client_socket, client_address, user_name)
-            list_clients[client_socket] = (client_address, user_name, client_handler) #dict
-            threading.Thread(target=client_handler.thread_loop, args=()).start()
+            client_startup = clientstartup.ClientStartup(client_socket, client_address)
+            threading.Thread(target=client_startup.thread_loop, args=()).start()
+
         except TimeoutError:
             pass
+        
+        
+def connect(client_startup: clientstartup.ClientStartup, new_user: bool):
+    try:
+        username = client_startup.user_dict["name"]
+        if new_user: save_user(username, client_startup.user_dict)
+        print(f"Clients before add: {clients()}")
+        make_client_list()  # This line is a tomato. DO NOT REMOVE!!
+        clients().add(username)
+        client_startup.client_socket.sendall(ascii_night_sky.encode())
+        client_startup.client_socket.sendall("You are now connected to the server. Start typing to communicate".encode())
+        logging.info(f"Sent welcome art to {client_startup.client_address}, {username}")
+        
+        # Create our client handler
+        client_handler = clienthandler.ClientHandler(client_startup.client_socket, client_startup.client_address, username)
+        list_clients[client_startup.client_socket] = (client_startup.client_address, username, client_handler) #dict
+        
+        client_startup.set_state(clientstartup.ClientState.REMOVE_SELF)
+        
+        threading.Thread(target=client_handler.thread_loop, args=()).start()
+        
+    except Exception as e:
+        logging.info(f"Exception connecting ClientStartup as ClientHandler! {e}")
+
+        
       
 
 # close all the clients and shutdown the server
@@ -129,6 +174,17 @@ def close_server(signum, frame):
         client.close()
     server_socket.close()
     sys.exit(0)
+    
+    
+  
+def make_client_list():
+    for file in get_database(".json"):
+        try:
+            with open(file, 'r') as f:
+                data = json.load(f)
+                clients().add(data["name"])
+        except Exception as e:
+            print(f"problem please contact Alex {e}")
 
 
 if __name__ == '__main__':

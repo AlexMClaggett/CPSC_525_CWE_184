@@ -68,3 +68,137 @@
 2025-11-15 18:19:39,224 - Server started and listening on localhost:12345
 2025-11-15 18:20:54,176 - Sent welcome art to ('127.0.0.1', 57725), hi
 2025-11-15 18:20:54,177 - Connection from ('127.0.0.1', 57725)
+2025-11-18 12:24:39,058 - Server started and listening on localhost:12345
+2025-11-18 12:25:37,335 - Sent welcome art to ('127.0.0.1', 59884), John
+2025-11-18 12:25:37,335 - Connection from ('127.0.0.1', 59884)
+2025-11-18 12:26:29,007 - Server started and listening on localhost:12345
+2025-11-18 12:26:45,349 - Sent welcome art to ('127.0.0.1', 59889), John
+2025-11-18 12:26:45,350 - Connection from ('127.0.0.1', 59889)
+2025-11-18 12:33:42,666 - Server started and listening on localhost:12345
+2025-11-18 12:34:04,305 - Server started and listening on localhost:12345
+2025-11-18 12:34:19,938 - Sent welcome art to ('127.0.0.1', 50144), John
+2025-11-18 12:34:19,939 - Connection from ('127.0.0.1', 50144)
+2025-11-18 12:45:07,295 - Server started and listening on localhost:12345
+2025-11-18 12:45:24,186 - Sent welcome art to ('127.0.0.1', 49337), John
+2025-11-18 12:46:13,825 - Server started and listening on localhost:12345
+2025-11-18 12:46:49,812 - Sent welcome art to ('127.0.0.1', 56991), John
+2025-11-18 12:46:49,813 - Connection from ('127.0.0.1', 56991)
+2025-11-18 12:49:03,007 - Server started and listening on localhost:12345
+2025-11-18 12:49:31,368 - Sent welcome art to ('127.0.0.1', 64794), John
+2025-11-18 12:49:31,368 - Connection from ('127.0.0.1', 64794)
+2025-11-18 12:51:38,615 - Server is shutting down on localhost:12345
+2025-11-18 13:03:34,694 - Server started and listening on localhost:12345
+2025-11-18 13:04:12,632 - Sent welcome art to ('127.0.0.1', 53526), mary
+2025-11-18 13:04:12,633 - Connection from ('127.0.0.1', 53526)
+2025-11-18 13:04:30,860 - Sent welcome art to ('127.0.0.1', 53532), John
+2025-11-18 13:04:30,860 - Connection from ('127.0.0.1', 53532)
+2025-11-18 13:06:10,194 - Server started and listening on localhost:12345
+2025-11-18 13:06:25,941 - Sent welcome art to ('127.0.0.1', 65169), hi
+2025-11-18 13:06:25,941 - Connection from ('127.0.0.1', 65169)
+2025-11-18 13:33:23,844 - Server started and listening on localhost:12345
+2025-11-18 13:33:37,108 - Sent welcome art to ('127.0.0.1', 62541), John
+2025-11-18 13:33:37,108 - Connection from ('127.0.0.1', 62541)
+2025-11-18 13:40:07,801 - Server started and listening on localhost:12345
+2025-11-18 13:44:37,714 - Sent welcome art to ('127.0.0.1', 52556), John
+2025-11-18 13:44:37,715 - Connection from ('127.0.0.1', 52556)
+2025-11-19 13:58:52,343 - Server started and listening on localhost:12345
+2025-11-19 13:59:19,015 - Sent welcome art to ('127.0.0.1', 60824), John
+2025-11-19 13:59:19,016 - Connection from ('127.0.0.1', 60824)
+2025-11-19 14:06:40,299 - Server started and listening on localhost:12345
+2025-11-19 14:10:08,255 - Server started and listening on localhost:12345
+2025-11-19 14:10:29,904 - Server started and listening on localhost:12345
+2025-11-19 14:10:50,831 - Server started and listening on localhost:12345
+2025-11-19 14:11:38,692 - Server started and listening on localhost:12345
+2025-11-19 14:12:11,380 - Server started and listening on localhost:12345
+2025-11-19 14:17:41,426 - Server started and listening on localhost:12345
+2025-11-19 14:18:25,835 - Server started and listening on localhost:12345
+2025-11-19 15:26:05,998 - Server started and listening on localhost:12345
+2025-11-19 15:26:40,647 - Server started and listening on localhost:12345
+2025-11-19 15:26:58,981 - Server started and listening on localhost:12345
+2025-11-19 15:29:53,374 - Server started and listening on localhost:12345
+2025-11-19 15:31:13,410 - Server started and listening on localhost:12345
+2025-11-19 15:32:22,071 - Server started and listening on localhost:12345
+2025-11-19 15:32:33,966 - Sent welcome art to ('127.0.0.1', 51008), andre
+2025-11-19 15:32:33,967 - Exception connecting ClientStartup as ClientHandler! 'set' object is not subscriptable
+2025-11-19 15:36:37,175 - Server started and listening on localhost:12345
+2025-11-19 15:36:52,220 - Sent welcome art to ('127.0.0.1', 63096), andre
+2025-11-19 15:36:52,220 - Connection from ('127.0.0.1', 63096)
+2025-11-19 15:38:57,010 - Server started and listening on localhost:12345
+2025-11-19 15:40:04,415 - Server started and listening on localhost:12345
+2025-11-19 15:40:20,477 - Sent welcome art to ('127.0.0.1', 63908), andre
+2025-11-19 15:40:20,478 - Connection from ('127.0.0.1', 63908)
+2025-11-19 15:41:07,122 - Closed connection with ('127.0.0.1', 63908), username: andre
+2025-11-19 15:41:10,607 - Server started and listening on localhost:12345
+2025-11-19 15:41:38,294 - Server started and listening on localhost:12345
+2025-11-19 15:41:51,710 - Sent welcome art to ('127.0.0.1', 53794), alex
+2025-11-19 15:41:51,710 - Connection from ('127.0.0.1', 53794)
+2025-11-19 15:42:58,649 - Server started and listening on localhost:12345
+2025-11-19 15:44:31,276 - Server started and listening on localhost:12345
+2025-11-19 15:44:47,349 - Sent welcome art to ('127.0.0.1', 65007), 1
+2025-11-19 15:44:47,349 - Connection from ('127.0.0.1', 65007)
+2025-11-19 15:44:59,684 - Sent welcome art to ('127.0.0.1', 65010), 2
+2025-11-19 15:44:59,762 - Connection from ('127.0.0.1', 65010)
+2025-11-19 15:46:18,186 - Server started and listening on localhost:12345
+2025-11-19 15:46:34,323 - Sent welcome art to ('127.0.0.1', 56038), yup
+2025-11-19 15:46:34,324 - Connection from ('127.0.0.1', 56038)
+2025-11-19 15:47:07,704 - Server started and listening on localhost:12345
+2025-11-19 15:47:18,707 - Sent welcome art to ('127.0.0.1', 56043), nope
+2025-11-19 15:47:18,707 - Connection from ('127.0.0.1', 56043)
+2025-11-21 14:31:17,941 - Server started and listening on localhost:12345
+2025-11-21 14:32:03,837 - Sent welcome art to ('127.0.0.1', 49675), John
+2025-11-21 14:32:03,837 - Connection from ('127.0.0.1', 49675)
+2025-11-21 14:32:45,104 - Closed connection with ('127.0.0.1', 49675), username: John
+2025-11-21 14:47:11,398 - Server started and listening on localhost:12345
+2025-11-21 14:47:38,855 - Sent welcome art to ('127.0.0.1', 61935), 3
+2025-11-21 14:47:38,856 - Connection from ('127.0.0.1', 61935)
+2025-11-21 14:49:44,964 - Server started and listening on localhost:12345
+2025-11-21 14:50:05,341 - Sent welcome art to ('127.0.0.1', 52504), bob
+2025-11-21 14:50:05,342 - Connection from ('127.0.0.1', 52504)
+2025-11-21 14:51:14,738 - Server started and listening on localhost:12345
+2025-11-21 14:53:09,450 - Server started and listening on localhost:12345
+2025-11-21 14:54:09,340 - Server started and listening on localhost:12345
+2025-11-21 14:57:27,490 - Server started and listening on localhost:12345
+2025-11-21 15:04:17,553 - Server started and listening on localhost:12345
+2025-11-21 15:04:32,312 - Sent welcome art to ('127.0.0.1', 63535), John
+2025-11-21 15:04:32,313 - Connection from ('127.0.0.1', 63535)
+2025-11-21 15:04:53,226 - Closed connection with ('127.0.0.1', 63535), username: John
+2025-11-21 15:05:54,412 - Server started and listening on localhost:12345
+2025-11-21 15:06:12,195 - Sent welcome art to ('127.0.0.1', 60704), John
+2025-11-21 15:06:12,195 - Connection from ('127.0.0.1', 60704)
+2025-11-21 15:08:44,580 - Server started and listening on localhost:12345
+2025-11-21 15:09:16,077 - Sent welcome art to ('127.0.0.1', 57169), John
+2025-11-21 15:09:16,078 - Connection from ('127.0.0.1', 57169)
+2025-11-21 15:11:01,784 - Server started and listening on localhost:12345
+2025-11-21 15:11:14,445 - Sent welcome art to ('127.0.0.1', 61284), John
+2025-11-21 15:11:14,445 - Connection from ('127.0.0.1', 61284)
+2025-11-21 15:11:16,438 - Closed connection with ('127.0.0.1', 61284), username: John
+2025-11-21 15:12:03,623 - Server started and listening on localhost:12345
+2025-11-21 15:12:31,134 - Sent welcome art to ('127.0.0.1', 53456), John
+2025-11-21 15:12:31,135 - Connection from ('127.0.0.1', 53456)
+2025-11-24 12:01:04,068 - Server started and listening on localhost:12345
+2025-11-24 12:01:23,472 - Sent welcome art to ('127.0.0.1', 64323), John
+2025-11-24 12:01:23,473 - Connection from ('127.0.0.1', 64323)
+2025-11-24 12:02:14,620 - Closed connection with ('127.0.0.1', 64323), username: John
+2025-11-24 12:02:27,405 - Server started and listening on localhost:12345
+2025-11-24 12:02:42,115 - Sent welcome art to ('127.0.0.1', 49944), John
+2025-11-24 12:02:42,116 - Connection from ('127.0.0.1', 49944)
+2025-11-24 12:03:26,810 - Closed connection with ('127.0.0.1', 49944), username: John
+2025-11-24 12:26:26,503 - Server started and listening on localhost:12345
+2025-11-24 12:26:48,539 - Sent welcome art to ('127.0.0.1', 50606), John
+2025-11-24 12:26:48,540 - Connection from ('127.0.0.1', 50606)
+2025-11-24 12:27:39,372 - Closed connection with ('127.0.0.1', 50606), username: John
+2025-11-24 12:28:13,540 - Sent welcome art to ('127.0.0.1', 50613), John
+2025-11-24 12:28:13,586 - Connection from ('127.0.0.1', 50613)
+2025-11-24 12:28:29,217 - Closed connection with ('127.0.0.1', 50613), username: John
+2025-11-24 12:29:08,042 - Server started and listening on localhost:12345
+2025-11-24 12:29:26,831 - Server started and listening on localhost:12345
+2025-11-24 12:35:33,574 - Sent welcome art to ('127.0.0.1', 53535), John
+2025-11-24 12:35:33,575 - Connection from ('127.0.0.1', 53535)
+2025-11-24 12:42:33,853 - Closed connection with ('127.0.0.1', 53535), username: John
+2025-11-24 12:42:58,361 - Sent welcome art to ('127.0.0.1', 62234), John
+2025-11-24 12:42:58,408 - Connection from ('127.0.0.1', 62234)
+2025-11-24 12:43:06,997 - Closed connection with ('127.0.0.1', 62234), username: John
+2025-11-24 12:47:34,756 - Server started and listening on localhost:12345
+2025-11-24 12:51:52,039 - Server started and listening on localhost:12345
+2025-11-24 12:52:20,294 - Server is shutting down on localhost:12345
+2025-11-24 12:52:25,547 - Server started and listening on localhost:12345
