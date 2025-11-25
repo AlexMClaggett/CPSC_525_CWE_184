@@ -202,3 +202,55 @@
 2025-11-24 12:51:52,039 - Server started and listening on localhost:12345
 2025-11-24 12:52:20,294 - Server is shutting down on localhost:12345
 2025-11-24 12:52:25,547 - Server started and listening on localhost:12345
+2025-11-24 18:00:21,419 - Server started and listening on localhost:12345
+2025-11-24 18:00:41,843 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:01:56,374 - Server started and listening on localhost:12345
+2025-11-24 18:02:11,422 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:04:25,303 - Server started and listening on localhost:12345
+2025-11-24 18:04:45,691 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:12:53,246 - Server started and listening on localhost:12345
+2025-11-24 18:13:12,557 - Sent welcome art to ('127.0.0.1', 54183), John
+2025-11-24 18:13:12,557 - Connection from ('127.0.0.1', 54183)
+2025-11-24 18:15:19,775 - Closed connection with ('127.0.0.1', 54183), username: John
+2025-11-24 18:16:00,033 - Server started and listening on localhost:12345
+2025-11-24 18:16:45,681 - Server started and listening on localhost:12345
+2025-11-24 18:17:02,408 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:18:33,840 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:24:00,134 - Server started and listening on localhost:12345
+2025-11-24 18:24:11,883 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:24:13,715 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:25:54,528 - Server started and listening on localhost:12345
+2025-11-24 18:26:06,378 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:26:08,030 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:27:46,329 - Server started and listening on localhost:12345
+2025-11-24 18:27:58,383 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:28:00,059 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:28:55,616 - Server started and listening on localhost:12345
+2025-11-24 18:29:09,864 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:29:11,325 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:30:02,423 - Server started and listening on localhost:12345
+2025-11-24 18:30:17,656 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-24 18:30:18,992 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:49:40,928 - Server started and listening on localhost:12345
+2025-11-25 10:49:53,492 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:49:55,380 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:49:56,839 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:52:28,725 - Server started and listening on localhost:12345
+2025-11-25 10:55:48,493 - Server started and listening on localhost:12345
+2025-11-25 10:55:58,360 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:56:57,903 - Server started and listening on localhost:12345
+2025-11-25 10:57:07,500 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:57:55,083 - Server started and listening on localhost:12345
+2025-11-25 10:58:06,099 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:58:53,874 - Server started and listening on localhost:12345
+2025-11-25 10:59:02,878 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 10:59:36,153 - Server started and listening on localhost:12345
+2025-11-25 10:59:48,601 - Server started and listening on localhost:12345
+2025-11-25 10:59:56,965 - Exception connecting ClientStartup as ClientHandler! save_user() takes 1 positional argument but 2 were given
+2025-11-25 11:00:41,246 - Server started and listening on localhost:12345
+2025-11-25 11:00:50,604 - Sent welcome art to ('127.0.0.1', 51553), aa
+2025-11-25 11:00:50,605 - Connection from ('127.0.0.1', 51553)
+2025-11-25 11:02:52,755 - Closed connection with ('127.0.0.1', 51553), username: aa
+2025-11-25 11:02:57,297 - Server started and listening on localhost:12345
+2025-11-25 11:03:12,297 - Sent welcome art to ('127.0.0.1', 51576), aaa
+2025-11-25 11:03:12,298 - Connection from ('127.0.0.1', 51576)

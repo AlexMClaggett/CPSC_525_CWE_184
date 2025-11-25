@@ -1,9 +1,9 @@
-import json
-import socket
-import sys
-import threading
-import logging
-import signal
+# import json
+# import socket
+# import sys
+# import threading
+# import logging
+# import signal
 import hashlib
 from enum import Enum
 import server
@@ -45,11 +45,11 @@ Would you like to login in or make and account?
 '''
                 self.client_socket.sendall(message.encode())
             case ClientState.NEW_USER:
-                message = "What would you like your username to be: "
-                self.client_socket.sendall(message.encode())
+                self.client_socket.sendall("What would you like your username to be: ".encode())
             case ClientState.LOGGING_IN:
                 pass
             case ClientState.CONNECT_AS_NEW:
+                print("Connect As New State set")
                 server.connect(self, True)
             case ClientState.CONNECT_AS_EXISTING:
                 server.connect(self, False)
@@ -100,6 +100,7 @@ Would you like to login in or make and account?
     
     def new_user(self):
         # Get Username
+        print("Begin new user")
         new_username = ""
         while True:
             try:
@@ -108,7 +109,7 @@ Would you like to login in or make and account?
                     self.client_socket.sendall("Sorry that username is taken. Please given a different username:".encode())
                 self.client_socket.sendall(f"Are you sure you would your username to be {new_username}? Y/N".encode())
                 check = self.client_socket.recv(1024).decode().rstrip().lower()
-                if check == 'n':
+                if check != 'y':
                     self.client_socket.sendall("Please give another.".encode())
                 else: break
             except TimeoutError:
@@ -118,22 +119,20 @@ Would you like to login in or make and account?
         new_password = ""
         while True:
             try:
-                self.client_socket.sendall("Please type in password: ".encode())
-                new_password = self.client_socket.recv(1024).decode().rstrip()
-                self.client_socket.sendall("Please re-type in password: ".encode())
-                new_password_2 = self.client_socket.recv(1024).decode().rstrip()
-                
+                self.client_socket.sendall("Please type in password:".encode())
+                new_password = hashlib.sha256(self.client_socket.recv(1024).decode().rstrip().encode()).hexdigest()
+                self.client_socket.sendall("Please re-type in password:".encode())
+                new_password_2 = hashlib.sha256(self.client_socket.recv(1024).decode().rstrip().encode()).hexdigest()
                 if new_password != new_password_2:
                     self.client_socket.sendall("Passwords do not match. Please try again.".encode())
                 else: break
             except TimeoutError:
                 self.set_state(ClientState.DISCONNECTED)
-            
         self.user_dict["name"] = new_username
-        self.user_dict["password"] = hashlib.sha256(new_password.encode()).hexdigest()
-        
-        self.set_state(ClientState.CONNECT_AS_NEW)
-    
+        self.user_dict["password"] = new_password
+        self.set_state(ClientState.CONNECT_AS_NEW)  
+            
+            
     
     def logging_in(self):
         # Get Username

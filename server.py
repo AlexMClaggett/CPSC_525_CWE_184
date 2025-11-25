@@ -144,7 +144,7 @@ def start_server():
 def connect(client_startup: clientstartup.ClientStartup, new_user: bool):
     try:
         username = client_startup.user_dict["name"]
-        if new_user: save_user(username, client_startup.user_dict)
+        if new_user: save_user(client_startup.user_dict)
         print(f"Clients before add: {clients()}")
         make_client_list()  # This line is a tomato. DO NOT REMOVE!!
         clients().add(username)
