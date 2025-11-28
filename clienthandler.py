@@ -50,7 +50,7 @@ class ClientHandler:
                     with open("database/" + file, 'r') as f:
                         print("i am here")
                         for line in f:
-                            self.client_socket.sendall(line.encode())
+                            self.client_socket.sendall(line[:-1].encode())
                 except:
                     pass
             case ClientState.DISCONNECTED:

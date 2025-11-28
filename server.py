@@ -78,6 +78,7 @@ def write_to_file(user1, user2, write):
     try:
         with open("database/" + file, "a") as f:
             f.write(write)
+            f.close()
     except:
         return False
     
@@ -90,9 +91,9 @@ def send_to_user(sender, senderSocket, receiver, message):
         (_, user, handler) = list_clients.get(client_socket)
         if handler.user_connection == sender:
             client_socket.sendall(message_send.encode())
-        write_to_file(sender, receiver, (message_send))
+        write_to_file(sender, receiver, (message_send + '\n'))
     else:
-        write_to_file(sender, receiver, (message_send))
+        write_to_file(sender, receiver, (message_send + '\n'))
 
 
 def get_database(require_ending=None):
