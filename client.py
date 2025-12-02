@@ -1,15 +1,7 @@
 import socket
 import threading
 import json
-import hashlib
 import os
-
-#TO DO
-#make client logfile
-#fix invalid username
-#make admin user
-
-
 
 # Server configuration
 SERVER_HOST = 'localhost'
@@ -25,6 +17,7 @@ def start_client():
         # set the timeout
         client_socket.settimeout(5)
         if not try_connection(client_socket):
+            # failed to connect
             return
 
         #make the thread for accepting connection
@@ -33,11 +26,13 @@ def start_client():
         # loop for accepting input
         while True:
             message = input()
-            #this is to make user that the terminal doesn't keep the input line
-            print(f"{prev_line}{clear_right}", end='') #goes up one line and clears it then does not make a new line 
+            # this is to make user that the terminal doesn't keep the input line
+            # goes up one line and clears it then does not make a new line
+            print(f"{prev_line}{clear_right}", end='')  
             
             
             if message == "\\exit":
+                # gracefully exit from server
                 my_exit(client_socket)
 
             send_message(client_socket, message)
@@ -50,10 +45,13 @@ def try_connection(client_socket):
     while True:
         try:
             client_socket.connect((SERVER_HOST, SERVER_PORT))
+            # Connection success
             return True
         except ConnectionRefusedError:
+            # failed to connect
             attempted_to_connect += 1
             print(f"Failed connect attempt {attempted_to_connect}")
+            # try connection up to three times before giving up
             if attempted_to_connect == 3:
                 print("Cannot connect to server")
                 return False
@@ -63,7 +61,7 @@ def try_connection(client_socket):
 def send_message(client_socket, message):
     # try to send a message will catch for timeout of connection loss
     try:
-
+        # send to server socket whatever's been typed
         client_socket.send(message.encode())
 
     except TimeoutError:
@@ -78,37 +76,26 @@ def send_message(client_socket, message):
 
 
 def my_exit(client_socket):
+    # gracefully exit from server
     global RUNNING
     RUNNING = False
+    # send exit code again so server is certain we no longer exist
     client_socket.send("\exit".encode())
     client_socket.close()
     exit(0)
 
 
 def receive_message(client_socket):
+    # threaded loop that gets server output. Always running
     while RUNNING:
         try:
+            # get server data
             response = client_socket.recv(4024).decode('utf-8', 'ignore')
+            # Display to terminal
             print(response)
         except (TimeoutError, TypeError, OSError):
             pass
 
-
-
-def make_client_list():
-    clients = []
-    current_dir = os.path.dirname(os.path.abspath("client.py"))
-    
-    for filename in os.listdir(current_dir):
-        if filename.endswith(".json"):
-            filename = os.path.join(current_dir, filename)
-            try:
-                with open(filename, 'r') as f:
-                    data = json.loads(f)
-                    clients.append(data["name"])
-            except Exception as e:
-                print(f"problem please contact Alex {e}")
-    return clients
 
 if __name__ == "__main__":
     start_client()

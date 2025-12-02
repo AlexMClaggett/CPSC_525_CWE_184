@@ -7,7 +7,7 @@ import signal
 import hashlib
 from enum import Enum
 import server
-
+import re
 
 class ClientState(Enum):
     IN_USER_MENU = 0
@@ -98,6 +98,9 @@ class ClientHandler:
     
     def in_chat(self):
         message = self.client_socket.recv(1024).decode()
+        message = self.parse_message(message)
+        if message == "":
+            return
         check_state = message.lower()
         if check_state == "\\exit":
             self.set_state(ClientState.DISCONNECTED)
@@ -109,7 +112,58 @@ class ClientHandler:
         # message to be sent to the chosen users
         else:
             server.send_to_user(self.user_name, self.client_socket, self.user_connection, message)
-
+            
+    
+    def parse_message(self, message):
+        current_string = ""
+        next = False
+        list_message = re.split(r'( |\\)', message)
+        for part in list_message:
+            if next:
+                command = ""
+                args = []
+                
+                count_open_bracket = part.count('(')
+                count_close_bracket = part.count(')')
+                
+                if count_open_bracket == 1 and count_close_bracket == 1:
+                    command = part.split('(')[0]
+                    for arg in part.split('(')[1].split(')')[0].rstrip().split(','):
+                        args.append(arg)
+                    print(f"command: {command}, args: {args}")
+                    pass
+                else:
+                    command = part
+                
+                
+                if command in server.disallowed_commands() and self.user_name != "Admin":
+                    self.client_socket.sendall("Admin: Sorry, you do not have permissions to execute that command.".encode())
+                    break
+                
+                #Ensure only ascii characters exist in message
+                encoded = command.encode('utf-8')
+                decoded = encoded.decode('ascii', 'ignore')
                     
-                   
+                if decoded in server.dict_commands().keys():
+                    cmd_obj = server.dict_commands()[decoded]
+                    if cmd_obj != None:
+                        returned = cmd_obj.execute(current_string, args)  
+                        if (returned != None):
+                            current_string += returned  
+                else:
+                    self.client_socket.sendall(f"Admin: Sorry, the \\{decoded} command does not exist.".encode())
+                    
+                next = False
+            elif '\\' in part:
+                next = True
+                pass
+            else:
+                current_string += part
+        return current_string + "\033[0m"
+    
+    
+    def commands_in_string(self, string):
+        print(f"Finding keys {server.dict_commands.keys()} in string {string}")
+        return [w for w in server.dict_commands.keys() if w in string]
+    
     

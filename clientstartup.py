@@ -1,14 +1,9 @@
-# import json
-# import socket
-# import sys
-# import threading
-# import logging
-# import signal
 import hashlib
 from enum import Enum
 import server
 
 
+# State for the state machine
 class ClientState(Enum):
     STARTUP = 0
     NEW_USER = 1
@@ -19,6 +14,10 @@ class ClientState(Enum):
     DISCONNECTED = 6
 
 
+###
+### ClientStartup Class
+### Contains state machine which guides user through login
+###
 
 class ClientStartup:
     def __init__(self, socket, addr):
@@ -27,24 +26,31 @@ class ClientStartup:
         self.state = ClientState(0)
         self.client_address = addr
         self.set_state(ClientState.STARTUP)
+        # Disallow blank and Admin usernames
         self.invalid_usernames = ["", "Admin"]
         
         self.user_dict = dict()
 
     
     
+    ### 
+    ### State Machine
+    ###
+    
     def set_state(self, new_state):
         # do changes as needed
         match new_state:
             case ClientState.STARTUP:
+                # Send welcome message
                 message =  '''
 Would you like to login in or make and account?
     For login type: Login
     To create an account type: New
-    To exit type: \exit
+    To exit type: \\exit
 '''
                 self.client_socket.sendall(message.encode())
             case ClientState.NEW_USER:
+                # User has 
                 self.client_socket.sendall("What would you like your username to be: ".encode())
             case ClientState.LOGGING_IN:
                 pass
@@ -146,8 +152,12 @@ Would you like to login in or make and account?
                 password = self.client_socket.recv(1024).decode().rstrip()
                 
                 user = server.load_user(username)
-                if user["password"] != hashlib.sha256(password.encode()).hexdigest():
-                    self.client_socket.sendall("Incorrect Username or Password. Please Try Again.".encode())
+                if not user or user["password"] != hashlib.sha256(password.encode()).hexdigest():
+                    self.client_socket.sendall("Incorrect Username or Password. Would you like to try again? Y/N".encode())
+                    check = self.client_socket.recv(1024).decode().rstrip().lower()
+                    if check != 'y':
+                        self.set_state(ClientState.STARTUP)
+                        return   
                 else: break
             except TimeoutError:
                 self.set_state(ClientState.DISCONNECTED)
