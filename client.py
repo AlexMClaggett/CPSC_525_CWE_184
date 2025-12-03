@@ -1,7 +1,6 @@
 import socket
 import threading
-import json
-import os
+
 
 # Server configuration
 SERVER_HOST = 'localhost'

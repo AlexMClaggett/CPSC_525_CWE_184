@@ -224,7 +224,7 @@ def connect(client_startup: clientstartup.ClientStartup, new_user: bool):
         threading.Thread(target=client_handler.thread_loop, args=()).start()
         
     except Exception as e:
-        logging.info(f"Exception connecting ClientStartup as ClientHandler! {e}")
+        logging.info(f"Exception connecting ClientStartup as ClientHandler {e}")
 
         
       
