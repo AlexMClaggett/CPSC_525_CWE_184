@@ -209,7 +209,7 @@ def connect(client_startup: clientstartup.ClientStartup, new_user: bool):
         # Send the welcome splash art to the user
         client_startup.client_socket.sendall(ascii_night_sky.encode())
         # Send welcome message
-        client_startup.client_socket.sendall("You are now connected to the server. Start typing to communicate".encode())
+        client_startup.client_socket.sendall("You are now connected to the server.".encode())
         logging.info(f"Sent welcome art to {client_startup.client_address}, {username}")
         
         # Create our client handler

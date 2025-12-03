@@ -1,13 +1,8 @@
-import json
-import socket
-import sys
-import threading
-import logging
-import signal
-import hashlib
 from enum import Enum
 import server
 import re
+
+
 
 
 # State for the State machine
@@ -50,7 +45,7 @@ class ClientHandler:
                 # send an menu to the client
                 message = """
                 - To exit type \\exit
-                - To pick new user type \\new user
+                - To pick new user type \\new_user
                 Please type the name of the person you want to talk to:
                 """
                 self.client_socket.sendall(message.encode())
@@ -69,6 +64,7 @@ class ClientHandler:
                 sort = sorted([self.user_name, self.user_connection])
                 file = server.ascii_filename("".join(sort), ".txt")
                 message = """
+                - Start typing to send messages. Press enter to send.
                 - Type \\colour("wanted text colour") to change the colour of following text
                 """
                 self.client_socket.sendall(message.encode())
@@ -100,8 +96,9 @@ class ClientHandler:
             pass
         finally:
             # Close the client connection
-            self.client_socket.close()
-            server.list_clients.pop(self.client_socket)
+            if self.client_socket != None:
+                server.list_clients().pop(self.client_socket)
+                self.client_socket.close()
             server.logging.info(f"Closed connection with {self.client_address}, username: {self.user_name}")
                 
         
@@ -109,12 +106,12 @@ class ClientHandler:
     
     def user_menu(self):
         # Check to see if the client wants to exit or new user
-        user_to_connect = self.client_socket.recv(1024).decode().rstrip().lower()
+        user_to_connect = self.client_socket.recv(1024).decode().rstrip()
         # if the client types exit gracefully disconnect
-        if user_to_connect == "\\exit":
+        if user_to_connect.lower() == "\\exit":
             self.set_state(ClientState.DISCONNECTED)
         # if the client types new user let them pick a new user
-        if user_to_connect == "\\new user":
+        if user_to_connect.lower() == "\\new_user":
             self.set_state(ClientState.IN_USER_MENU)
         # if nothing matches a username ask for another input
         if user_to_connect not in server.clients():
@@ -128,17 +125,17 @@ class ClientHandler:
     # 
     def in_chat(self):
         message = self.client_socket.recv(1024).decode()
+        # check for exit and new user commands
+        check_state = message.lower()
+        if check_state == "\\exit":
+            self.set_state(ClientState.DISCONNECTED)
+        if check_state == "\\new_user":
+            self.set_state(ClientState.IN_USER_MENU)
         # if there is a blank message return so that input is listened for again
         if message == "":
             return
         # check the message for \commands
         message = self.parse_message(message)
-        # check for exit and new user commands
-        check_state = message.lower()
-        if check_state == "\\exit":
-            self.set_state(ClientState.DISCONNECTED)
-        if check_state == "\\new user":
-            self.set_state(ClientState.IN_USER_MENU)
         if not message:  # Client has closed the connection
             self.set_state(ClientState.DISCONNECTED)
         # message to be sent to the chosen users
@@ -149,16 +146,19 @@ class ClientHandler:
     def parse_message(self, message):
         current_string = ""
         next = False
+        was_cmd = False
         # split the message by spaces and slashes to read the commands
-        list_message = re.split(r'( |\\)', message)
+        list_message = re.split(r'(\)|\\)', message)       
         # go through the list and if there is a \ then the next index will be a command
         for part in list_message:
+            print(f"Found Part: {part}")
             if next:
                 # this is a command that the client has asked to do
                 command = ""
                 args = []
                 
                 count_open_bracket = part.count('(')
+                if count_open_bracket == 1: part += ")"
                 count_close_bracket = part.count(')')
                 
                 # find the arg inside the brackets
@@ -166,7 +166,7 @@ class ClientHandler:
                     command = part.split('(')[0]
                     #split the args using the , 
                     for arg in part.split('(')[1].split(')')[0].rstrip().split(','):
-                        args.append(arg)
+                        args.append(arg.strip())
                     print(f"command: {command}, args: {args}")
                     pass
                 # else will always run after the args are found
@@ -207,13 +207,19 @@ class ClientHandler:
                     self.client_socket.sendall(f"Admin: Sorry, the \\{decoded} command does not exist.".encode())
                 ###   
                 next = False
+                was_cmd = True
             # set the bool that the next index will be a command
             elif '\\' in part:
                 next = True
+                was_cmd = False
                 pass
-            # add the string to the return string
+            elif part == ")" and was_cmd:
+                # remove this as it is the backend of a command
+                was_cmd = False
             else:
+                # add the string to the return string
                 current_string += part
+                was_cmd = False
         return current_string + "\033[0m"
     
     # returns true if a command is found in the list of server dict keys

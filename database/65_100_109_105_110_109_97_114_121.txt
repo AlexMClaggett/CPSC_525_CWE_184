@@ -1,0 +1,12 @@
+Admin: Hi Mary[0m
+Admin: [0m
+Admin: hello[0m
+Admin: hi[0m
+Admin: [0;31m hi[0m
+Admin: [0m
+Admin: [0m
+Admin: [0m
+Admin: [0;34m I am blue[0m
+Admin: [0m
+Admin: show_chat(Admin,Mary)[0m
+Admin: [0m

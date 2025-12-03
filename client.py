@@ -79,7 +79,7 @@ def my_exit(client_socket):
     global RUNNING
     RUNNING = False
     # send exit code again so server is certain we no longer exist
-    client_socket.send("\exit".encode())
+    client_socket.send("\\exit".encode())
     client_socket.close()
     exit(0)
 

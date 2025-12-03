@@ -57,6 +57,12 @@ def main():
     }
     save_user("mary", mary)
     print(load_user("mary"))   
+    password = hashlib.sha256("Admin".encode()).hexdigest()
+    Admin = {
+        "name" : "Admin",
+        "password": password,
+    }
+    save_user("Admin", Admin)
     
 
 
