@@ -1,6 +1,10 @@
 import ansi
 import server
+import os
 
+
+
+## User commands
 class ColorCommand:
     def __init__(self):
         pass
@@ -43,6 +47,53 @@ class ColorCommand:
         return ansi.ANSI.END
 
 
+        
+class TextModCommand():
+    def __init__(self):
+        pass
+    
+    # function that puts the text modifier code into the client message
+    def execute(self, message: str, list_args: list):
+        if len(list_args) != 1:
+            return None
+        match list_args[0].lower():
+            case "bold":
+                return ansi.ANSI.BOLD
+            case "italic":
+                return ansi.ANSI.ITALIC
+            case "underline":
+                return ansi.ANSI.UNDERLINE
+            case "negative":
+                return ansi.ANSI.NEGATIVE
+            case "crossed":
+                return ansi.ANSI.CROSSED
+        return ansi.ANSI.END
+    
+    
+### Admin Commands
+class DeleteUserCommand():
+    def __init__(self):
+        pass
+    
+    # deletes a user
+    def execute(self, message: str, list_args: list):
+        # check that there is a user given
+        if len(list_args) != 1:
+            return None
+        #convert the username into ascii numbers
+        file = server.ascii_filename(list_args[0], ".json")
+        try:
+            os.remove("database/" + file)
+            print("removed")
+            #remake the client list after the deletion 
+            server.make_client_list()
+            return "File deleted successfully."
+        except FileNotFoundError:
+            return f"Error: File '{"database/" + file}' not found."
+        except Exception as e:
+            return f"An error occurred: {e}"
+        
+
 class ShowChatCommand:
     def __init__(self):
         pass
@@ -62,7 +113,5 @@ class ShowChatCommand:
                     chat += line
                 return chat
         except:
-            return None
+            return "Server: No chat to display"
         
-        
-#class AddText 

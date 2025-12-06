@@ -45,12 +45,13 @@ class ClientHandler:
                 # send an menu to the client
                 message = """
                 - To exit type \\exit
-                - To pick new user type \\new_user
-                Please type the name of the person you want to talk to:
+                - To pick new user type \\user_menu
+                Please type the name of the person you want to talk to: \n
                 """
                 self.client_socket.sendall(message.encode())
                 client_list_print = ""
                 i = 0
+                server.make_client_list()
                 print(f"Clients at time: {server.clients()}")
                 # send the list of users to the client
                 for item in server.clients():
@@ -111,7 +112,7 @@ class ClientHandler:
         if user_to_connect.lower() == "\\exit":
             self.set_state(ClientState.DISCONNECTED)
         # if the client types new user let them pick a new user
-        if user_to_connect.lower() == "\\new_user":
+        if user_to_connect.lower() == "\\user_menu":
             self.set_state(ClientState.IN_USER_MENU)
         # if nothing matches a username ask for another input
         if user_to_connect not in server.clients():
@@ -129,8 +130,10 @@ class ClientHandler:
         check_state = message.lower()
         if check_state == "\\exit":
             self.set_state(ClientState.DISCONNECTED)
-        if check_state == "\\new_user":
+            return
+        if check_state == "\\user_menu":
             self.set_state(ClientState.IN_USER_MENU)
+            return
         # if there is a blank message return so that input is listened for again
         if message == "":
             return
@@ -140,7 +143,7 @@ class ClientHandler:
             self.set_state(ClientState.DISCONNECTED)
         # message to be sent to the chosen users
         else:
-            server.send_to_user(self.user_name, self.client_socket, self.user_connection, message)
+            server.send_to_user(self.user_name, self.client_socket, self.user_connection, message + "\033[0m")
             
     # check the user message for commands
     def parse_message(self, message):
@@ -220,7 +223,7 @@ class ClientHandler:
                 # add the string to the return string
                 current_string += part
                 was_cmd = False
-        return current_string + "\033[0m"
+        return current_string# + "\033[0m"
     
     # returns true if a command is found in the list of server dict keys
     def commands_in_string(self, string):

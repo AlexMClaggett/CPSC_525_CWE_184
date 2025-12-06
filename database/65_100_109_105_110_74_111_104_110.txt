@@ -13,3 +13,23 @@ Admin: [0m
 [0m
 Admin: huh[0m
 Admin: [0m
+John:  this is underline[0m
+John: [4m this is underline[0m
+John: [4m [0;35m  this is underline and purple[0m
+John: no[0m
+John: bad[0m
+John: [5m this is blink?[0m
+John: [5mthis is blink?[0m
+John: [7mthis is negative?[0m
+John: [7mthis is negative?[0m
+John: [9mthis is crossed?[0m
+John: [0m
+Admin: [0m
+Admin: File deleted successfully.[0m
+Admin: [0m
+Admin: [0m
+Admin: File deleted successfully.[0m
+Admin: [4m [0;35m no add[0m
+Admin: [4m[0;35m no add[0m
+John: [0;31m red[0m
+John: [0;31m[4m red underlined[0m

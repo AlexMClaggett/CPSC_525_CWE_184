@@ -250,6 +250,7 @@ def close_server(signum, frame):
   
 def make_client_list():
     # Get all jsons from database
+    clients().clear()
     for file in get_database(".json"):
         try:
             with open(file, 'r') as f:
@@ -264,12 +265,14 @@ def make_client_list():
 def make_command_list():
     # List all disallowed commands 
     # Exception: Admin can always execute these
-    disallowed_commands().extend(["show_chat"])
+    disallowed_commands().extend(["show_chat", "delete"])
     
     # Add all other commands to list.
     # Structure: Command Word, Command Object
     dict_commands()["colour"] = chatcommands.ColorCommand()
     dict_commands()["show_chat"] = chatcommands.ShowChatCommand()
+    dict_commands()["text_mod"] = chatcommands.TextModCommand()
+    dict_commands()["delete"] = chatcommands.DeleteUserCommand()
     
     
 if __name__ == '__main__':
