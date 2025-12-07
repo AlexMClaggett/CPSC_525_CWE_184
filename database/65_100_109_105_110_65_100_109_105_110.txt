@@ -9,3 +9,5 @@ Admin: [0m
 Admin: File deleted successfully.[0m
 Admin: /new_user[0m
 Admin: [0m
+Admin: Error: File 'database/74_111_104_110_77_65_82_89.txt' not found.[0m
+Admin: Files deleted successfully[0m

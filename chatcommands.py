@@ -77,21 +77,39 @@ class DeleteUserCommand():
     
     # deletes a user
     def execute(self, message: str, list_args: list):
+        
         # check that there is a user given
         if len(list_args) != 1:
             return None
         #convert the username into ascii numbers
         file = server.ascii_filename(list_args[0], ".json")
+        # delete the user json file
         try:
             os.remove("database/" + file)
-            print("removed")
             #remake the client list after the deletion 
             server.make_client_list()
-            return "File deleted successfully."
         except FileNotFoundError:
             return f"Error: File '{"database/" + file}' not found."
         except Exception as e:
             return f"An error occurred: {e}"
+        server.make_client_list()
+        # delete all the text file associated with that user
+        for user in server.clients():
+            sort = sorted([list_args[0], user])
+            file = server.ascii_filename("".join(sort), ".txt")
+            try:
+                os.remove("database/" + file)
+            except FileNotFoundError:
+                continue
+            except Exception as e:
+                return f"An error occurred: {e}"
+         
+        return "Files deleted successfully"
+            
+            
+        
+        
+        
         
 
 class ShowChatCommand:

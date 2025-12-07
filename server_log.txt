@@ -474,3 +474,20 @@
 2025-12-06 12:37:35,679 - Sent welcome art to ('127.0.0.1', 60318), Mary
 2025-12-06 12:37:35,681 - Connection from ('127.0.0.1', 60318)
 2025-12-06 12:38:55,682 - Closed connection with ('127.0.0.1', 60318), username: Mary
+2025-12-07 13:40:10,295 - Server started and listening on localhost:12345
+2025-12-07 13:40:25,860 - Sent welcome art to ('127.0.0.1', 59164), Admin
+2025-12-07 13:40:25,862 - Connection from ('127.0.0.1', 59164)
+2025-12-07 14:46:55,261 - Closed connection with ('127.0.0.1', 59164), username: Admin
+2025-12-07 14:47:00,650 - Server started and listening on localhost:12345
+2025-12-07 14:47:29,174 - Sent welcome art to ('127.0.0.1', 65511), Bob
+2025-12-07 14:47:29,176 - Connection from ('127.0.0.1', 65511)
+2025-12-07 14:47:42,384 - Closed connection with ('127.0.0.1', 65511), username: Bob
+2025-12-07 14:48:45,003 - Sent welcome art to ('127.0.0.1', 65521), John
+2025-12-07 14:48:46,011 - Connection from ('127.0.0.1', 65521)
+2025-12-07 14:49:08,875 - Closed connection with ('127.0.0.1', 65521), username: John
+2025-12-07 14:49:32,599 - Sent welcome art to ('127.0.0.1', 65527), Admin
+2025-12-07 14:49:34,301 - Connection from ('127.0.0.1', 65527)
+2025-12-07 14:51:30,597 - Closed connection with ('127.0.0.1', 65527), username: Admin
+2025-12-07 14:52:06,597 - Sent welcome art to ('127.0.0.1', 52061), John
+2025-12-07 14:52:09,588 - Connection from ('127.0.0.1', 52061)
+2025-12-07 14:54:06,041 - Closed connection with ('127.0.0.1', 52061), username: John

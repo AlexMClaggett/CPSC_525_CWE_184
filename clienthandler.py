@@ -51,6 +51,7 @@ class ClientHandler:
                 self.client_socket.sendall(message.encode())
                 client_list_print = ""
                 i = 0
+                # make an updated list of users
                 server.make_client_list()
                 print(f"Clients at time: {server.clients()}")
                 # send the list of users to the client
@@ -67,6 +68,7 @@ class ClientHandler:
                 message = """
                 - Start typing to send messages. Press enter to send.
                 - Type \\colour("wanted text colour") to change the colour of following text
+                - Type \\test_mod("wanted mod") to change the following text
                 """
                 self.client_socket.sendall(message.encode())
                 # print the content of the prev conversion if there is one
@@ -143,6 +145,7 @@ class ClientHandler:
             self.set_state(ClientState.DISCONNECTED)
         # message to be sent to the chosen users
         else:
+            # the message is sent with \33[0m to remove any text colour or modifiers that may have been adding
             server.send_to_user(self.user_name, self.client_socket, self.user_connection, message + "\033[0m")
             
     # check the user message for commands
@@ -193,8 +196,8 @@ class ClientHandler:
                 # But when it check against all the commands the server has available it will run the disallowed command
                 
                 # Example:
-                #Not Admin client: show_chat(user1,user2) doesn't pass the list of disallowed inputs
-                #Not Admin client: show_chat愛(user1,user2) does pass the list of disallowed inputs and will run the show_chat command 
+                #Not Admin client: \show_chat(user1,user2) doesn't pass the list of disallowed inputs
+                #Not Admin client: \show_chat愛(user1,user2) does pass the list of disallowed inputs and will run the show_chat command 
                 encoded = command.encode('utf-8')
                 decoded = encoded.decode('ascii', 'ignore')
 
