@@ -1,2 +1,5 @@
 John: hi[0m
 John: how are you[0m
+Mary: Hi my name is Mary[0m
+Mary: I am good[0m
+Mary: [0;31m do you like red[0m

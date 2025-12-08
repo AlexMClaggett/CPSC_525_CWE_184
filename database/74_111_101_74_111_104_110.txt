@@ -1,0 +1,6 @@
+Joe: hi[0m
+Joe: [0;36m[4mhow are you [0m :)[0m
+John: Hi[0m
+John: I am good[0m
+John: Hi[0m
+John: [0;34m [4m hi[0m

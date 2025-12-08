@@ -1,0 +1,64 @@
+Bob: John: hi[0m
+John: how are you[0m
+[0m
+Bob: Joe: hi[0m
+Joe: [0;36m[4mhow are you [0m :)[0m
+John: Hi[0m
+John: I am good[0m
+John: Hi[0m
+John: [0;34m [4m hi[0m
+[0m
+Bob: John: hi[0m
+John: how are you[0m
+Mary: Hi my name is Mary[0m
+Mary: I am good[0m
+Mary: [0;31m do you like red[0m
+[0m
+Bob: Joe: hi[0m
+Joe: [0;36m[4mhow are you [0m :)[0m
+John: Hi[0m
+John: I am good[0m
+John: Hi[0m
+John: [0;34m [4m hi[0m
+[0m
+Bob: John: John: hi[0m
+John: how are you[0m
+[0m
+John: [0m
+John: [0m
+[0m
+Bob: John: John: hi[0m
+John: how are you[0m
+[0m
+John: [0m
+John: [0m
+[0m
+Bob: Server: No chat to display[0m
+Bob: Server: No chat to display[0m
+Bob: Admin: Hi Mary[0m
+Admin: Sorry for all that[0m
+Admin: uh[0m
+Admin: server errors be funky I guess[0m
+Admin: Wanna see what we were up to though?[0m
+Admin: Admin: Hi Mary[0m
+Admin: [0m
+Admin: hello[0m
+Admin: hi[0m
+Admin: [0;31m hi[0m
+Admin: [0m
+Admin: [0m
+Admin: [0m
+Admin: [0;34m I am blue[0m
+Admin: [0m
+Admin: show_chat(Admin,Mary)[0m
+Admin: [0m
+[0m
+Admin: so yeah[0m
+Admin: pretty cool huh[0m
+Admin: anyway bye[0m
+Admin: hi hello ) this is red.[0m
+Admin: [0;31m hi in red[0m
+Admin: [0;31mhi in red[0m
+Admin: [0m
+Admin: [0m
+[0m

@@ -1,0 +1,5 @@
+James: Hi John[0m
+James: [0;36m my name is James [4m how are you[0m
+John: hi James[0m
+John: I am good[0m
+James: [0m

@@ -145,8 +145,7 @@ class ClientHandler:
             self.set_state(ClientState.DISCONNECTED)
         # message to be sent to the chosen users
         else:
-            # the message is sent with \33[0m to remove any text colour or modifiers that may have been adding + "\033[0m"
-            server.send_to_user(self.user_name, self.client_socket, self.user_connection, message + "\033[0m")
+            server.send_to_user(self.user_name, self.client_socket, self.user_connection, message)
             
     # check the user message for commands
     def parse_message(self, message):
@@ -211,7 +210,9 @@ class ClientHandler:
                             current_string += returned  
                 else:
                     self.client_socket.sendall(f"Admin: Sorry, the \\{decoded} command does not exist.".encode())
-                ###   
+                ###
+                ###   END OF VULNERABILITY
+                ###
                 next = False
                 was_cmd = True
             # set the bool that the next index will be a command
@@ -226,7 +227,8 @@ class ClientHandler:
                 # add the string to the return string
                 current_string += part
                 was_cmd = False
-        return current_string #+ "\033[0m"
+        # Adds a ANSI END to the end to the string, to removes any colours or text modifiers
+        return current_string + "\033[0m"
     
     # returns true if a command is found in the list of server dict keys
     def commands_in_string(self, string):

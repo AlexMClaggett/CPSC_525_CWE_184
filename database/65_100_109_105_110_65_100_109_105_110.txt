@@ -11,3 +11,24 @@ Admin: /new_user[0m
 Admin: [0m
 Admin: Error: File 'database/74_111_104_110_77_65_82_89.txt' not found.[0m
 Admin: Files deleted successfully[0m
+Admin: John: hi[0m
+John: how are you[0m
+[0m
+Admin: Joe: hi[0m
+Joe: [0;36m[4mhow are you [0m :)[0m
+John: Hi[0m
+John: I am good[0m
+John: Hi[0m
+[0m
+Admin: Joe: hi[0m
+Joe: [0;36m[4mhow are you [0m :)[0m
+John: Hi[0m
+John: I am good[0m
+John: Hi[0m
+[0m
+Admin: Joe: hi[0m
+Joe: [0;36m[4mhow are you [0m :)[0m
+John: Hi[0m
+John: I am good[0m
+John: Hi[0m
+[0m
