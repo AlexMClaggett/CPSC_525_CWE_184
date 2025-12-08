@@ -145,7 +145,7 @@ class ClientHandler:
             self.set_state(ClientState.DISCONNECTED)
         # message to be sent to the chosen users
         else:
-            # the message is sent with \33[0m to remove any text colour or modifiers that may have been adding
+            # the message is sent with \33[0m to remove any text colour or modifiers that may have been adding + "\033[0m"
             server.send_to_user(self.user_name, self.client_socket, self.user_connection, message + "\033[0m")
             
     # check the user message for commands
@@ -226,7 +226,7 @@ class ClientHandler:
                 # add the string to the return string
                 current_string += part
                 was_cmd = False
-        return current_string# + "\033[0m"
+        return current_string #+ "\033[0m"
     
     # returns true if a command is found in the list of server dict keys
     def commands_in_string(self, string):
